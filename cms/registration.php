@@ -12,6 +12,16 @@
         $email = mysqli_real_escape_string($connection, $email);
         $password = mysqli_real_escape_string($connection, $password);
 
+        $query = "SELECT randSalt FROM users";
+        $select_randsalt_query = mysqli_query($connection, $query);
+        if(!$select_randsalt_query){
+            die("QUERY FAILED " . mysqli_error($connection));
+        }
+
+        while($row = mysqli_fetch_assoc($select_randsalt_query)){
+            
+        }
+
     }
 
 ?>
