@@ -77,8 +77,8 @@
     </div>
 
     <div class="form-group">
-        <label for="user_password">Password</label>
-        <input type="password" value="<?php echo $user_password; ?>" class="form-control" name="user_password">
+        <label for="user_password">New Password</label>
+        <input type="password" value="" class="form-control" name="user_password">
     </div>
 
     <div class="form-group">
