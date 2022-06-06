@@ -36,7 +36,7 @@
 
     <div class="form-group">
         <label for="title">Username</label>
-        <input type="text" class="form-control" name="username">
+        <input type="text" class="form-control" name="user_name">
     </div>
 
     <div class="form-group">
