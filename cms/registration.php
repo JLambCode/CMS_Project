@@ -7,10 +7,14 @@
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
 
         $username = mysqli_real_escape_string($connection, $username);
         $email = mysqli_real_escape_string($connection, $email);
         $password = mysqli_real_escape_string($connection, $password);
+        $first_name = mysqli_real_escape_string($connection, $first_name);
+        $last_name = mysqli_real_escape_string($connection, $last_name);
 
         $query = "SELECT randSalt FROM users";
         $select_randsalt_query = mysqli_query($connection, $query);
@@ -21,8 +25,8 @@
         $row = mysqli_fetch_assoc($select_randsalt_query);
         $salt = $row['randSalt'];
 
-        $query = "INSERT INTO users (user_name, user_email, user_password, access) ";
-        $query.= "VALUES('{$username}','{$email}','{$password}','')";
+        $query = "INSERT INTO users (user_name, user_email, user_first_name, user_last_name, user_password, user_role) ";
+        $query.= "VALUES('{$username}','{$email}','{$first_name}','{$last_name}','{$password}','User')";
         $register_user_query = mysqli_query($connection, $query);
         if(!$register_user_query){
             die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
@@ -51,6 +55,14 @@
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name" class="sr-only">First Name</label>
+                            <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Enter First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name" class="sr-only">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter Last Name">
                         </div>
                          <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
