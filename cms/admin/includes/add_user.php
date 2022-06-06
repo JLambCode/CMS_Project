@@ -26,10 +26,10 @@
             $row = mysqli_fetch_assoc($select_randsalt_query);
             $salt = $row['randSalt'];
 
-            $user_password = crypt($user_password, $salt);
+            $hashed_password = crypt($user_password, $salt);
 
             $query = "INSERT INTO users(user_name, user_password, user_first_name, user_last_name, user_email, user_image, user_role) ";
-            $query .= "VALUES('{$user_name}','{$user_password}','{$user_first_name}','{$user_last_name}','{$user_email}','{$user_image}','{$user_role}')";
+            $query .= "VALUES('{$user_name}','{$hashed_password}','{$user_first_name}','{$user_last_name}','{$user_email}','{$user_image}','{$user_role}')";
         
             $add_user_query = mysqli_query($connection, $query);
 
