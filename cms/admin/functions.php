@@ -193,11 +193,6 @@
             $delete_query = mysqli_query($connection, $query);
             confirm_query($delete_query);
 
-            $query = "UPDATE posts SET post_comment_count = post_comment_count - 1 ";
-            $query.= "WHERE post_id = $comment_post_id";
-            $adjust_comment_count_query = mysqli_query($connection, $query);
-            confirm_query($adjust_comment_count_query);
-
             header("Location: comments.php");
         }
     }
