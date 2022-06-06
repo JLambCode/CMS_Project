@@ -1,7 +1,7 @@
 <?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "includes/header.php"; ?>
 
- <?php
+<?php
 
     if(isset($_POST['submit'])){
         $username = $_POST['username'];
@@ -24,6 +24,8 @@
 
         $row = mysqli_fetch_assoc($select_randsalt_query);
         $salt = $row['randSalt'];
+
+        $password = crypt($password, $salt);
 
         if(empty($username) || empty($email) || empty($password) || empty($first_name) || empty($last_name)){
 
