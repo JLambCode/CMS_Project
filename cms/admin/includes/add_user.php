@@ -11,24 +11,31 @@
 
         move_uploaded_file($user_image_temp, "../images");
 
-        $query = "SELECT randSalt FROM users";
-        $select_randsalt_query = mysqli_query($connection, $query);
-        if(!$select_randsalt_query){
-            die("QUERY FAILED " . mysqli_error($connection));
+        if(empty($user_name) || empty($user_password) || empty($user_first_name) || empty($user_last_name) || empty($user_email)){
+
+            echo "<script>alert('Fields cannot be blank!');</script>";
+
+        } else {
+
+            $query = "SELECT randSalt FROM users";
+            $select_randsalt_query = mysqli_query($connection, $query);
+            if(!$select_randsalt_query){
+                die("QUERY FAILED " . mysqli_error($connection));
+            }
+
+            $row = mysqli_fetch_assoc($select_randsalt_query);
+            $salt = $row['randSalt'];
+
+            $user_password = crypt($user_password, $salt);
+
+            $query = "INSERT INTO users(user_name, user_password, user_first_name, user_last_name, user_email, user_image, user_role) ";
+            $query .= "VALUES('{$user_name}','{$user_password}','{$user_first_name}','{$user_last_name}','{$user_email}','{$user_image}','{$user_role}')";
+        
+            $add_user_query = mysqli_query($connection, $query);
+
+            confirm_query($add_user_query);
+            header("Location: users.php");
         }
-
-        $row = mysqli_fetch_assoc($select_randsalt_query);
-        $salt = $row['randSalt'];
-
-        $user_password = crypt($user_password, $salt);
-
-        $query = "INSERT INTO users(user_name, user_password, user_first_name, user_last_name, user_email, user_image, user_role) ";
-        $query .= "VALUES('{$user_name}','{$user_password}','{$user_first_name}','{$user_last_name}','{$user_email}','{$user_image}','{$user_role}')";
-    
-        $add_user_query = mysqli_query($connection, $query);
-
-        confirm_query($add_user_query);
-        header("Location: users.php");
     }
 ?>
 
