@@ -1,6 +1,10 @@
 <div class="col-md-4">
 
 <!-- Login Well -->
+<?php 
+    if(!$_SESSION['user_role'] == 'Admin' || !$_SESSION['user_role'] == 'User'){
+?>
+
     <div class="well">
         <h4>Login</h4>
         <form action="includes/login.php" method="post">
@@ -15,7 +19,11 @@
             </div>
         </form><!-- search form-->
         <!-- /.input-group -->
-    </div>    
+    </div>
+
+<?php 
+    }
+?>    
 
 <!-- Blog Search Well -->
     <div class="well">
