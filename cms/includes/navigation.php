@@ -27,6 +27,9 @@
                         }
 
 ?>
+                    <li>
+                        <a href="./registration.php">Register</a>
+                    </li>
 <?php
                         if(!$_SESSION['user_role'] == 'Admin'){
                             
@@ -44,7 +47,7 @@
                             } 
                         } 
 ?>
-
+                    
 <!--  
                     <li>
                         <a href="#">Services</a>
