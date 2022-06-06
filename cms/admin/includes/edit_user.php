@@ -8,7 +8,6 @@
         while($row = mysqli_fetch_assoc($select_user_by_id)){
             $user_id = $row['user_id'];
             $user_name = $row['user_name'];
-            $user_password = $row['user_password'];
             $user_first_name = $row['user_first_name'];
             $user_last_name = $row['user_last_name'];
             $user_email = $row['user_email'];
@@ -42,7 +41,7 @@
         if(empty($user_name) || empty($user_password) || empty($user_first_name) || empty($user_last_name) || empty($user_email)){
 
             echo "<script>alert('Fields cannot be blank!');</script>";
-            
+
         } else {
             $query = "SELECT randSalt FROM users";
             $select_randsalt_query = mysqli_query($connection, $query);
