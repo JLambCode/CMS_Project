@@ -123,7 +123,7 @@
 
             echo "<td><a href='comments.php?approve_comment={$comment_id}'>Approve Comment</a></td>";
             echo "<td><a href='comments.php?pend_comment={$comment_id}'>Pend Comment</a></td>";
-            echo "<td><a onClick=\"javascript: return confirm('Confirm Delete?'); \" href='comments.php?delete_comment={$comment_id}&post_id={$comment_post_id}'>Delete Comment</a></td>";
+            echo "<td><a onClick=\"javascript: return confirm('Confirm Delete?'); \" href='comments.php?delete_comment={$comment_id}'>Delete Comment</a></td>";
             echo "</tr>";
         }
     }
@@ -186,9 +186,8 @@
     function delete_comment(){
         global $connection;
 
-        if(isset($_GET['delete_comment']['post_id'])){
+        if(isset($_GET['delete_comment'])){
             $deleted_comment_id = $_GET['delete_comment'];
-            $comment_post_id = $_GET['post_id'];
             $query = "DELETE FROM comments WHERE comment_id = {$deleted_comment_id}";
             $delete_query = mysqli_query($connection, $query);
             confirm_query($delete_query);
