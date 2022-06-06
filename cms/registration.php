@@ -25,13 +25,20 @@
         $row = mysqli_fetch_assoc($select_randsalt_query);
         $salt = $row['randSalt'];
 
-        $query = "INSERT INTO users (user_name, user_email, user_first_name, user_last_name, user_password, user_role) ";
-        $query.= "VALUES('{$username}','{$email}','{$first_name}','{$last_name}','{$password}','User')";
-        $register_user_query = mysqli_query($connection, $query);
-        if(!$register_user_query){
-            die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
-        }
+        if(empty($username) || empty($email) || empty($password) || empty($first_name) || empty($last_name)){
 
+            echo "<script> alert('All Fields Are Required!'); </script>";
+
+        } else {
+
+            $query = "INSERT INTO users (user_name, user_email, user_first_name, user_last_name, user_password, user_role) ";
+            $query.= "VALUES('{$username}','{$email}','{$first_name}','{$last_name}','{$password}','User')";
+            $register_user_query = mysqli_query($connection, $query);
+            if(!$register_user_query){
+                die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
+            }
+
+        }
     }
 
 ?>
