@@ -38,6 +38,7 @@
                 die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
             }
 
+            header("Location:../cms");
         }
     }
 
