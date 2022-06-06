@@ -38,34 +38,39 @@
                 $user_image = $row['user_image'];
             }
         }
-
-        $query = "SELECT randSalt FROM users";
-        $select_randsalt_query = mysqli_query($connection, $query);
-        if(!$select_randsalt_query){
-            die("QUERY FAILED " . mysqli_error($connection));
-        }
-
-        $row = mysqli_fetch_assoc($select_randsalt_query);
-        $salt = $row['randSalt'];
-
-        $user_password = crypt($user_password, $salt);
-
-        $query = "UPDATE users SET ";
-        $query.= "user_name = '{$user_name}', ";
-        $query.= "user_password = '{$user_password}', ";
-        $query.= "user_first_name = '{$user_first_name}', ";
-        $query.= "user_last_name = '{$user_last_name}', ";
-        $query.= "user_email = '{$user_email}', ";
-        $query.= "user_image = '{$user_image}', ";
-        $query.= "user_role = '{$user_role}' ";
-        $query.= "WHERE user_id = {$user_id}";
-
-        $update_user = mysqli_query($connection, $query);
-
-        confirm_query($update_user);
-
-        header("Location: users.php");
         
+        if(empty($user_name) || empty($user_password) || empty($user_first_name) || empty($user_last_name) || empty($user_email)){
+
+            echo "<script>alert('Fields cannot be blank!');</script>";
+            
+        } else {
+            $query = "SELECT randSalt FROM users";
+            $select_randsalt_query = mysqli_query($connection, $query);
+            if(!$select_randsalt_query){
+                die("QUERY FAILED " . mysqli_error($connection));
+            }
+
+            $row = mysqli_fetch_assoc($select_randsalt_query);
+            $salt = $row['randSalt'];
+
+            $hashed_password = crypt($user_password, $salt);
+
+            $query = "UPDATE users SET ";
+            $query.= "user_name = '{$user_name}', ";
+            $query.= "user_password = '{$hashed_password}', ";
+            $query.= "user_first_name = '{$user_first_name}', ";
+            $query.= "user_last_name = '{$user_last_name}', ";
+            $query.= "user_email = '{$user_email}', ";
+            $query.= "user_image = '{$user_image}', ";
+            $query.= "user_role = '{$user_role}' ";
+            $query.= "WHERE user_id = {$user_id}";
+
+            $update_user = mysqli_query($connection, $query);
+
+            confirm_query($update_user);
+
+            header("Location: users.php");
+        }
     }
 ?>
 
