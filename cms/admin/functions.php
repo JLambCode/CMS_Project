@@ -84,7 +84,7 @@
             echo "<td>$post_tags</td>";
             echo "<td>$post_comment_count</td>";
             echo "<td><a href='posts.php?source=edit_post&post_id={$post_id}'>Edit Post</a></td>";
-            echo "<td><a href='posts.php?delete={$post_id}'>Delete Post</a></td>";
+            echo "<td><a onClick=\"javascript: return confirm('Confirm Delete?');\" href='posts.php?delete={$post_id}'>Delete Post</a></td>";
             echo "</tr>";
         }
     }
@@ -123,7 +123,7 @@
 
             echo "<td><a href='comments.php?approve_comment={$comment_id}'>Approve Comment</a></td>";
             echo "<td><a href='comments.php?pend_comment={$comment_id}'>Pend Comment</a></td>";
-            echo "<td><a href='comments.php?delete_comment={$comment_id}&post_id={$comment_post_id}'>Delete Comment</a></td>";
+            echo "<td><a onClick=\"javascript: return confirm('Confirm Delete?'); \" href='comments.php?delete_comment={$comment_id}&post_id={$comment_post_id}'>Delete Comment</a></td>";
             echo "</tr>";
         }
     }
@@ -152,7 +152,7 @@
             echo "<td><img width='100' src='../img/$user_image' alt='image'></td>";
             echo "<td>$user_role</td>";
             echo "<td><a href='users.php?source=edit_user&user_id={$user_id}'>Edit User</a></td>";
-            echo "<td><a href='users.php?delete_user={$user_id}'>Delete User</a></td>";
+            echo "<td><a onClick=\"javascript: return confirm('Confirm Delete?');\" href='users.php?delete_user={$user_id}'>Delete User</a></td>";
             echo "</tr>";
         }
     }
