@@ -28,7 +28,9 @@
 
 ?>
 <?php
-                        if($_SESSION['user_role'] == 'Admin'){
+                        if(!$_SESSION['user_role'] == 'Admin'){
+                            
+                        } else {
                             if(!isset($_GET['post_id'])){
 
                                 echo "<li><a href='admin'>Admin</a></li>";
