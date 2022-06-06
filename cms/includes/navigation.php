@@ -27,12 +27,14 @@
                         }
 
 ?>
-                    <li>
-                        <a href="./registration.php">Register</a>
-                    </li>
+                    
 <?php
-                        if(!$_SESSION['user_role'] == 'Admin'){
-                            
+                        if(!$_SESSION['user_role'] == 'Admin' || !$_SESSION['user_role'] == 'User'){
+
+                            echo "<li><a href='./registration.php'>Register</a></li>";
+
+                        } else if(!$_SESSION['user_role'] == 'Admin'){
+
                         } else {
                             if(!isset($_GET['post_id'])){
 
