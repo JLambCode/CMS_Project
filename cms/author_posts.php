@@ -87,9 +87,10 @@
 
         if(isset($_GET['post_id'])){
             $this_post_id = $_GET['post_id'];
+            $this_post_author = $_GET['post_author'];
         }
 
-                $query = "SELECT * FROM posts WHERE post_id = $this_post_id";
+                $query = "SELECT * FROM posts WHERE post_author = ' {$this_post_author}' ";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                         while($row = mysqli_fetch_assoc($select_all_posts_query)){
