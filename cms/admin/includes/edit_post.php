@@ -32,6 +32,9 @@
 
         move_uploaded_file($post_image_temp, "../img/$post_image");
 
+        $post_content = filter_var($post_content, FILTER_SANITIZE_STRING);
+        $post_title = filter_var($post_title, FILTER_SANITIZE_STRING);
+
         if(empty($post_image)){
             $query = "SELECT * FROM posts WHERE post_id = $post_id";
             $select_image = mysqli_query($connection, $query);

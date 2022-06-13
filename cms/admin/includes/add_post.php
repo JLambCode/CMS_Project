@@ -3,7 +3,6 @@
         $post_title = $_POST['title'];
         $post_author = $_POST['author'];
         $post_category_id = $_POST['post_category'];
-        $post_status = $_POST['post_status'];
         $post_image = $_FILES['post_image']['name'];
         $post_image_temp = $_FILES['post_image']['tmp_name'];
         $post_tags = $_POST['post_tags'];
@@ -12,8 +11,11 @@
 
         move_uploaded_file($post_image_temp, "../images");
 
+        $post_content = filter_var($post_content, FILTER_SANITIZE_STRING);
+        $post_title = filter_var($post_title, FILTER_SANITIZE_STRING);
+
         $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
-        $query .= "VALUES({$post_category_id},'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
+        $query .= "VALUES({$post_category_id},'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','DRAFT')";
     
         $create_post_query = mysqli_query($connection, $query);
 
@@ -51,14 +53,6 @@
     <div class="form-group">
         <label for="author">Post Author</label>
         <input type="text" class="form-control" name="author">
-    </div>
-
-    <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <select name="post_status" id="post_status">
-            <option value="PUBLISHED">PUBLISHED</option>
-            <option value="DRAFT">DRAFT</option>
-        </select>
     </div>
 
     <div class="form-group">

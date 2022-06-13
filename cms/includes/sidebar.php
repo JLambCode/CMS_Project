@@ -2,7 +2,7 @@
 
 <!-- Login Well -->
 <?php 
-    if(!$_SESSION['user_role'] == 'Admin' || !$_SESSION['user_role'] == 'User'){
+    if(isset($_SESSION['user_role']) != 'Admin' || isset($_SESSION['user_role']) != 'User'){
 ?>
 
     <div class="well">

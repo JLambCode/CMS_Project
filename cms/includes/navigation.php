@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,11 +30,11 @@
 ?>
                     
 <?php
-                        if(!$_SESSION['user_role'] == 'Admin' || !$_SESSION['user_role'] == 'User'){
+                        if(isset($_SESSION['user_role']) != 'Admin' || isset($_SESSION['user_role']) != 'User'){
 
                             echo "<li><a href='./registration.php'>Register</a></li>";
 
-                        } else if(!$_SESSION['user_role'] == 'Admin'){
+                        } else if(isset($_SESSION['user_role']) != 'Admin'){
 
                         } else {
                             if(!isset($_GET['post_id'])){
