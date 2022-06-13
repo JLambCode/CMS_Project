@@ -24,6 +24,29 @@
                     confirm_query($delete_selected_posts);
 
                     break;
+
+                case 'clone' :
+                    $query = "SELECT * FROM posts WHERE post_id = '{postValueID}' ";
+                    $select_post_query = mysqli_query($connection, $query);
+
+                    while ($row = mysqli_fetch_assoc($select_post_query)){
+                        $post_title = $row['post_title'];
+                        $post_category_id = $row['post_category_id'];
+                        $post_date = $row['post_date'];
+                        $post_author = $row['post_author'];
+                        $post_status = $row['post_status'];
+                        $post_image = $row['post_image'];
+                        $post_tags = $row['post_tags'];
+                        $post_content = $row['post_content'];
+                    
+                        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_status, post_image, post_tags, post_content) ";
+                        $query.= "VALUES({$post_category_id},'{$post_title}','{$post_author}',now(),'{$post_status}','{$post_image}','{$post_tags}','{$post_content}')";
+                        $clone_selected_posts = mysqli_query($connection, $query);
+                        confirm_query($clone_selected_posts);
+
+                    }
+
+                    break;
             }
         }
     }
@@ -36,6 +59,7 @@
             <select class="form-control" name="bulk_options" id="">
                 <option value="PUBLISHED">Publish</option>
                 <option value="DRAFT">Draft</option>
+                <option value="clone">Clone</option>
                 <option value="delete">Delete</option>
             </select>
         </div>
